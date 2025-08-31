@@ -1,0 +1,18 @@
+{
+  "totalDistanceKm": 6.85,
+  "minElevation": 66,
+  "maxElevation": 260,
+  "elevationGain": 194,
+  "elevationLoss": 197,
+  "estimatedTimeMins": 41,
+  "bounds": {
+    "northeast": [
+      174.76194620132446,
+      -41.29344463348389
+    ],
+    "southwest": [
+      174.75027322769165,
+      -41.30393743515015
+    ]
+  }
+}
