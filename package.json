@@ -1,15 +1,14 @@
 {
   "name": "gpx-converter",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Convert GPX files to JSON formats for React Native apps",
+  "main": "convert.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "convert": "node convert.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "keywords": ["gpx", "gps", "converter", "react-native", "geojson"],
+  "author": "albaricoque1127",
+  "license": "MIT",
   "dependencies": {
     "fast-xml-parser": "^5.2.5"
   }

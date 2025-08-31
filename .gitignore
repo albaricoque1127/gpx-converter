@@ -2,3 +2,9 @@
 
 # dependencies
 node_modules/
+
+# gpx files and output files
+*.gpx
+*-geojson.json
+*-elevation.json  
+*-stats.json

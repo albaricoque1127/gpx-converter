@@ -1,38 +1,51 @@
 # GPX to Route Data Converter
 
-Converts GPX files to JSON formats needed for a React Native running route app.
+A Node.js script that converts GPX files (exported from GPS devices like Garmin) into JSON formats optimized for React Native running route applications.
 
-The `convert.js` script converts a gpx file (e.g. exported from Garmin) into:
-- geojson for use with @rnmapbox/maps
-- elevation data for use with Victory Native XL charts
-- route stats for the application database
+## What it does
+
+The `convert.js` script transforms a single GPX file into three specialized JSON outputs:
+- **GeoJSON** for map visualization with @rnmapbox/maps
+- **Elevation profile data** for charts using Victory Native XL
+- **Route statistics** for database storage
+
+## Prerequisites
+
+- Node.js (version 12 or higher)
+- npm (comes with Node.js)
 
 ## Setup
 
-1. Create new folder: `gpx-converter`
-2. Initialize project:
+1. Clone this repository:
    ```bash
-   npm init -y
-   npm install fast-xml-parser
+   git clone <your-repo-url>
+   cd gpx-converter
    ```
-3. Save `convert.js` script in folder
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+   This installs the required `fast-xml-parser` package as specified in `package.json`.
 
 ## Usage
 
-1. Save `your-route.gpx` in the same folder
-2. Run the below command in the terminal
-
-```bash
-node convert.js your-route.gpx
-```
+1. Place your GPX file in the project directory
+2. Run the converter with your GPX file:
+   ```bash
+   node convert.js your-route.gpx
+   ```
 
 ## Outputs
 
-For route named "Wadestown Loop", creates:
+For a route named "Wadestown Loop", the script generates:
 
-- `wadestown-loop-geojson.json` - For @rnmapbox/maps
-- `wadestown-loop-elevation.json` - For Victory Native XL charts  
-- `wadestown-loop-stats.json` - For database insertion
+- `wadestown-loop-geojson.json` - Map line data for @rnmapbox/maps
+- `wadestown-loop-elevation.json` - Chart data for Victory Native XL  
+- `wadestown-loop-stats.json` - Summary statistics for your database
+
+All output files are created in the same directory as the script.
 
 ## Output Formats
 
@@ -44,7 +57,7 @@ For route named "Wadestown Loop", creates:
     "type": "Feature",
     "geometry": {
       "type": "LineString",
-      "coordinates": [[lon, lat], ...]
+      "coordinates": [[longitude, latitude], ...]
     }
   }]
 }
@@ -58,6 +71,7 @@ For route named "Wadestown Loop", creates:
   ...
 ]
 ```
+*Distance in kilometers, elevation in meters*
 
 ### Stats (Database)
 ```json
@@ -75,9 +89,25 @@ For route named "Wadestown Loop", creates:
 }
 ```
 
-## Notes
+## Technical Details
 
-- Uses 6 min/km pace for time estimation
-- Distances calculated with Haversine formula
-- Elevation gain/loss from point-to-point changes
-- Coordinates in [longitude, latitude] order for GeoJSON
+- **Time estimation**: Uses 6 min/km average pace
+- **Distance calculation**: Haversine formula for GPS accuracy
+- **Elevation changes**: Calculated from point-to-point GPS data
+- **Coordinate format**: [longitude, latitude] (GeoJSON standard)
+
+## Troubleshooting
+
+- **"Cannot find module 'fast-xml-parser'"**: Run `npm install`
+- **"No such file or directory"**: Ensure your GPX file path is correct
+- **Empty output files**: Check that your GPX file contains track points with coordinates
+
+## File Structure
+```
+gpx-converter/
+├── convert.js          # Main conversion script
+├── package.json        # Dependencies and project info
+├── README.md          # This file
+├── your-route.gpx     # Your GPX files go here
+└── output-files.json  # Generated files appear here
+```
